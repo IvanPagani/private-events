@@ -1,0 +1,16 @@
+<h1>Events#index</h1>
+<p>Find me in app/views/events/index.html.erb</p>
+
+<h1>All Events</h1>
+
+<% if @events.any? %>
+  <ul>
+  <% @events.each do |event| %>
+    <li>
+    <strong><%= event.title%></strong> 
+    </li>
+  <% end %>
+  </ul>
+<% else %>
+  <p>No events have been created yet.</p>
+<% end %>
