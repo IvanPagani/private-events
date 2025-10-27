@@ -1,16 +1,29 @@
 <h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
 
-<h1>All Events</h1>
+<div>
+  <% if user_signed_in? %>
+    <p>Welcome, <%= current_user.email %>!
+      <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+    </p>
+    <p><%= link_to "Your Events", user_path(current_user) %></p>
+  <% else %>
+    <%= link_to "Sign Up", new_user_registration_path %> | 
+    <%= link_to "Log In",  new_user_session_path %>
+  <% end %>
+</div>
+
+<h2>All Events</h2>
 
 <% if @events.any? %>
   <ul>
   <% @events.each do |event| %>
     <li>
-    <strong><%= event.title%></strong> 
+      <strong><%= event.title%></strong>
+      at <%= event.location %> 
+      on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
     </li>
   <% end %>
   </ul>
 <% else %>
-  <p>No events have been created yet.</p>
+  <p>No events found.</p>
 <% end %>

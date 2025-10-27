@@ -1,0 +1,17 @@
+<h1>Users#show</h1>
+
+<h2><%= @user.email %> Events</h2>
+
+<% if @user.created_events.any? %>
+  <ul>
+  <% @user.created_events.each do |event| %>
+    <li>
+      <strong><%= event.title%></strong>
+      at <%= event.location %> 
+      on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
+    </li>
+  <% end %>
+  </ul>
+<% else %>
+  <p>This user hasn't created any events yet.</p>
+<% end %>
