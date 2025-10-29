@@ -20,6 +20,8 @@
       <% @events.each do |event| %>
         <li>
           <strong><%= link_to event.title, event %></strong>
+          at <%= event.location %> 
+          on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
         </li>
       <% end %>
     </ul>

@@ -6,7 +6,7 @@
   <ul>
   <% @user.created_events.each do |event| %>
     <li>
-      <strong><%= event.title%></strong>
+      <strong><%= link_to event.title, event%></strong>
       at <%= event.location %> 
       on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
     </li>
@@ -14,4 +14,38 @@
   </ul>
 <% else %>
   <p>This user hasn't created any events yet.</p>
+<% end %>
+
+<% past_events = @user.attended_events.select { |event| event.event_datetime < Time.current } %>
+<% upcoming_events = @user.attended_events.select { |event| event.event_datetime >= Time.current } %>
+
+
+<h3>Upcoming Events</h3>
+<% if upcoming_events.any? %>
+  <ul>
+    <% upcoming_events.each do |event| %>
+      <li>
+        <strong><%= link_to event.title, event %></strong>
+        at <%= event.location %> 
+        on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No upcoming events.</p>
+<% end %>
+
+<h3>Past Events</h3>
+<% if past_events.any? %>
+<ul>
+    <% past_events.each do |event| %>
+      <li>
+        <strong><%= link_to event.title, event %></strong>
+        at <%= event.location %> 
+        on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No past events.</p>
 <% end %>
