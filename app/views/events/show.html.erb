@@ -5,3 +5,18 @@
 <p><strong>Date & Time:</strong> <%= @event.event_datetime.strftime("%B %d, %Y %H:%M") %></p>
 <p><strong>Created by:</strong> <%= @event.creator.email %></p>
 <%= link_to "Back to Events", events_path %>
+<p></p>
+
+<% if current_user.attended_events.include?(@event) %>
+  <% attendance = current_user.event_attendances.find_by(attended_event: @event) %>
+  <%= button_to "Cancel Attendance", event_attendance_path(attendance), method: :delete %>
+<% else %>
+  <%= button_to "Attend Event", event_attendances_path(event_id: @event.id), method: :post %>
+<% end %>
+
+<h2>Attendees</h2>
+<ul>
+  <% @event.attendees.each do |attendee| %>
+    <li><%= attendee.email %></li>
+  <% end %>
+</ul>

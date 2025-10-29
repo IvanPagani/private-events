@@ -1,22 +1,31 @@
 <h1>Events#new</h1>
 
-<%= form_with(model: @event, local: true) do |f| %>
+<%= form_with model: @event do |form| %>
   <div>
-    <%= f.label :title, "Event Title" %><br>
-    <%= f.text_field :title %>
+    <%= form.label :title,  "Event Title" %><br>
+    <%= form.text_field :title %>
+    <% @event.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
 
   <div>
-    <%= f.label :location, "Event Location" %><br>
-    <%= f.text_field :location %>
+    <%= form.label :location, "Event Location" %><br>
+    <%= form.text_field :location %>
+    <% @event.errors.full_messages_for(:location).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
 
   <div>
-    <%= f.label :event_datetime, "Date and Time" %><br>
-    <%= f.datetime_select :event_datetime %>
+    <%= form.label :event_datetime, "Date and Time" %><br>
+    <%= form.datetime_select :event_datetime %>
+    <% @event.errors.full_messages_for(:event_datetime).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
   </div>
 
   <div>
-    <%= f.submit "Create Event" %>
+    <%= form.submit "Create Event" %>
   </div>
 <% end %>

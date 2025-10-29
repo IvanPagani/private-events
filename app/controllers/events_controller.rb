@@ -11,8 +11,9 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.created_events.build(event_params)
+
     if @event.save
-      redirect_to events_path, notice: "Event created successfully!"
+      redirect_to @event
     else
       render :new, status: :unprocessable_entity
     end
@@ -25,6 +26,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:title, :location, :event_datetime)
+    params.expect(event: [ :title, :location, :event_datetime ])
   end
 end
