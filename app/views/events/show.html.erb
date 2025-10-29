@@ -1,0 +1,7 @@
+<h1>Events#show</h1>
+
+<h2><%= @event.title %></h2>
+<p><strong>Location:</strong> <%= @event.location %></p>
+<p><strong>Date & Time:</strong> <%= @event.event_datetime.strftime("%B %d, %Y %H:%M") %></p>
+<p><strong>Created by:</strong> <%= @event.creator.email %></p>
+<%= link_to "Back to Events", events_path %>

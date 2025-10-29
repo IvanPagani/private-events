@@ -7,24 +7,25 @@
     </p>
     <p><%= link_to "Your Events", user_path(current_user) %></p>
     <p><%= link_to "New Event", new_event_path %></p>
+
   <% else %>
     <%= link_to "Sign Up", new_user_registration_path %> | 
     <%= link_to "Log In",  new_user_session_path %>
   <% end %>
+
+  <h2>All Events</h2>
+    
+  <% if @events.any? %>
+    <ul>
+      <% @events.each do |event| %>
+        <li>
+          <strong><%= link_to event.title, event %></strong>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No events found.</p>
+  <% end %>
+  
 </div>
 
-<h2>All Events</h2>
-
-<% if @events.any? %>
-  <ul>
-  <% @events.each do |event| %>
-    <li>
-      <strong><%= event.title%></strong>
-      at <%= event.location %> 
-      on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
-    </li>
-  <% end %>
-  </ul>
-<% else %>
-  <p>No events found.</p>
-<% end %>
