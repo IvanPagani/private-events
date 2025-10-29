@@ -15,18 +15,34 @@
 
   <h2>All Events</h2>
     
-  <% if @events.any? %>
+  <h3>Upcoming Events</h3>
+  <% if @upcoming_events.any? %>
     <ul>
-      <% @events.each do |event| %>
+      <% @upcoming_events.each do |event| %>
         <li>
           <strong><%= link_to event.title, event %></strong>
-          at <%= event.location %> 
+          at <%= event.location %>
           on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
         </li>
       <% end %>
     </ul>
   <% else %>
-    <p>No events found.</p>
+    <p>No upcoming events.</p>
+  <% end %>
+
+  <h3>Past Events</h3>
+  <% if @past_events.any? %>
+    <ul>
+      <% @past_events.each do |event| %>
+        <li>
+          <strong><%= link_to event.title, event %></strong>
+          at <%= event.location %>
+          on <%= event.event_datetime.strftime("%B %d, %Y %H:%M") %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No past events.</p>
   <% end %>
   
 </div>
