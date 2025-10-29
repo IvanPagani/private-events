@@ -4,7 +4,6 @@
 <p><strong>Location:</strong> <%= @event.location %></p>
 <p><strong>Date & Time:</strong> <%= @event.event_datetime.strftime("%B %d, %Y %H:%M") %></p>
 <p><strong>Created by:</strong> <%= @event.creator.email %></p>
-<%= link_to "Back to Events", events_path %>
 <p></p>
 
 <% if current_user.attended_events.include?(@event) %>
