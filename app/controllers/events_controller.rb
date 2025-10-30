@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   before_action :authorize_user!, only: [ :edit, :update, :destroy ]
 
   def index
-    @events = Event.all
+    @events = Event.all.public_events
   end
 
   def new
@@ -23,6 +23,7 @@ class EventsController < ApplicationController
   end
 
   def show
+    @attendance = current_user.event_attendances.find_by(attended_event: @event)
   end
 
   def edit
@@ -38,7 +39,7 @@ class EventsController < ApplicationController
 
   def destroy
     @event.destroy
-    redirect_to events_path
+    redirect_to user_path(current_user)
   end
 
   private

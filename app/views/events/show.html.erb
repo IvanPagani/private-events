@@ -4,6 +4,7 @@
 <p><strong>Location:</strong> <%= @event.location %></p>
 <p><strong>Date & Time:</strong> <%= @event.event_datetime.strftime("%B %d, %Y %H:%M") %></p>
 <p><strong>Created by:</strong> <%= @event.creator.email %></p>
+<p><strong>Privacy:</strong> <%= @event.private? ? "Private" : "Public" %></p>
 <p></p>
 
 <% if current_user == @event.creator %>
@@ -12,8 +13,7 @@
 <% end %>
 
 <% if current_user.attended_events.include?(@event) %>
-  <% attendance = current_user.event_attendances.find_by(attended_event: @event) %>
-  <%= button_to "Cancel Attendance", event_attendance_path(attendance), method: :delete %>
+  <%= button_to "Cancel Attendance", event_attendance_path(@attendance), method: :delete %>
 <% else %>
   <%= button_to "Attend Event", event_attendances_path(event_id: @event.id), method: :post %>
 <% end %>

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  scope :past,     -> { where("event_datetime < ?",  Time.current).order(event_datetime: :desc) }
+  scope :upcoming, -> { where("event_datetime >= ?", Time.current).order(event_datetime:  :asc) }
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

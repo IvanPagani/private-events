@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   scope :past,     -> { where("event_datetime < ?",  Time.current).order(event_datetime: :desc) }
   scope :upcoming, -> { where("event_datetime >= ?", Time.current).order(event_datetime:  :asc) }
+  scope :public_events, -> { where(private: false) }
 
   validates :title, :location, :event_datetime, presence: true
 

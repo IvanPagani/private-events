@@ -5,8 +5,6 @@
     <p>Welcome, <%= current_user.email %>!</p>
   <% end %>
 
-  <h2>All Events</h2>
-    
   <h3>Upcoming Events</h3>
   <% if @events.upcoming.any? %>
     <ul>
@@ -36,6 +34,5 @@
   <% else %>
     <p>No past events.</p>
   <% end %>
-  
 </div>
 
