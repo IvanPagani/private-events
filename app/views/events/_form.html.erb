@@ -1,0 +1,37 @@
+<%= form_with model: @event do |form| %>
+  <div>
+    <%= form.label :title, "Event Title" %><br>
+    <%= form.text_field :title %>
+    <% @event.errors.full_messages_for(:title).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :location, "Event Location" %><br>
+    <%= form.text_field :location %>
+    <% @event.errors.full_messages_for(:location).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :event_datetime, "Date and Time" %><br>
+    <%= form.datetime_select :event_datetime %>
+    <% @event.errors.full_messages_for(:event_datetime).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :private, "Private Event?" %>
+    <%= form.check_box :private %>
+    <% @event.errors.full_messages_for(:private).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

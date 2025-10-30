@@ -6,6 +6,11 @@
 <p><strong>Created by:</strong> <%= @event.creator.email %></p>
 <p></p>
 
+<% if current_user == @event.creator %>
+  <%= button_to "Edit Event",   edit_event_path(@event), method: :get %>
+  <%= button_to "Delete Event", event_path(@event),      method: :delete %>
+<% end %>
+
 <% if current_user.attended_events.include?(@event) %>
   <% attendance = current_user.event_attendances.find_by(attended_event: @event) %>
   <%= button_to "Cancel Attendance", event_attendance_path(attendance), method: :delete %>
