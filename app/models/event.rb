@@ -10,11 +10,6 @@ class Event < ApplicationRecord
   has_many :event_attendances, foreign_key: :attended_event_id, dependent: :destroy
   has_many :attendees, through: :event_attendances, source: :attendee
 
-  # def self.past
-  #  self.where("event_datetime < ?", Time.current).order(event_datetime: :desc)
-  # end
-  #
-  # def self.upcoming
-  #  self.where("event_datetime >= ?", Time.current).order(event_datetime: :asc)
-  # end
+  has_many :event_invitations, foreign_key: :invited_to_event_id, dependent: :destroy
+  has_many :invited_users, through: :event_invitations, source: :invited_user
 end
