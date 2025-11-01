@@ -1,0 +1,17 @@
+<h1>EventInvitations#new</h1>
+
+<h2>Invite a User to <%= @event.title %></h2>
+
+<%= form_with model: [@event, @invitation] do |f| %>
+  <div>
+    <%= f.label :invited_user_id, "Select a User to Invite" %><br>
+    <%= f.collection_select :invited_user_id, @eligible_users, :id, :email, prompt: "Choose a user" %>
+  </div>
+
+  <div>
+    <%= f.hidden_field :status, value: :pending %>
+    <p></p>
+    <%= f.submit "Send Invitation" %>
+  </div>
+<% end %>
+

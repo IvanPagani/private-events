@@ -10,6 +10,7 @@
 <% if current_user == @event.creator %>
   <%= button_to "Edit Event",   edit_event_path(@event), method: :get %>
   <%= button_to "Delete Event", event_path(@event),      method: :delete %>
+  <%= button_to "Invite User", new_event_event_invitation_path(event_id: @event.id), method: :get %>
 <% end %>
 
 <% if current_user.attended_events.include?(@event) %>

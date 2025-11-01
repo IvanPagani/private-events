@@ -2,6 +2,28 @@
 
 <h2><%= @user.email %> Events</h2>
 
+<h3>Invitations Received</h3>
+
+<% if @received_invitations.any? %>
+  <ul>
+    <% @received_invitations.each do |invitation| %>
+      <% event = invitation.invited_to_event %>
+
+      <li>
+        <strong><%= link_to event.title, event %></strong>
+        — Status: <%= invitation.status.capitalize %>
+
+        <% if invitation.pending? %>
+          <%= button_to "Accept", event_event_invitation_path(invitation, status: :accepted), method: :patch %>
+          <%= button_to "Decline", event_event_invitation_path(invitation, status: :declined), method: :patch %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No invitations received.</p>
+<% end %>
+
 <h3>Upcoming Events</h3>
 <% if @upcoming_events.any? %>
   <ul>
